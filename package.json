@@ -1,12 +1,11 @@
 {
-  "name": "hyrule",
+  "name": "roadhogx",
   "version": "1.0.0",
   "description": "Cli tool for serve and build react app, based on roadhog, support JSON pattern config, support more features",
   "bin": {
-    "hyrule": "./bin/roadhog.js"
+    "roadhog": "./bin/roadhog.js"
   },
   "keywords": [
-    "hyrule",
     "roadhog",
     "react",
     "cli",
