@@ -225,7 +225,7 @@ export function getCommonPlugins({ config, paths, appBuild, NODE_ENV }) {
   const ret = [];
 
   // ref: https://zhuanlan.zhihu.com/p/27980441
-  ret.push(new webpack.optimize.ModuleConcatenationPlugin());
+  // ret.push(new webpack.optimize.ModuleConcatenationPlugin());
 
   let defineObj = {
     'process.env': {

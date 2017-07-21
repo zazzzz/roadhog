@@ -29,6 +29,7 @@ export default function (args, appBuild, config, paths) {
     libraryTarget = 'var',
     devtool = debug ? defaultDevtool : false,
     chunkFilename = '[name].async.js',
+    extractCssName = '[name].css',
   } = config;
 
   const babelOptions = getBabelOptions(config);
@@ -63,7 +64,9 @@ export default function (args, appBuild, config, paths) {
         new webpack.optimize.OccurrenceOrderPlugin(),
         new webpack.optimize.DedupePlugin(),
       ]),
-      new ExtractTextPlugin('[name].css'),
+      // ref: https://zhuanlan.zhihu.com/p/27980441
+      new webpack.optimize.ModuleConcatenationPlugin(),
+      new ExtractTextPlugin(extractCssName),
       ...getCommonPlugins({
         config,
         paths,
