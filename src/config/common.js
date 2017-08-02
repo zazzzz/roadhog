@@ -69,7 +69,11 @@ export function getResolve(config, paths) {
         services: path.join(paths.appSrc, 'services'),
         assets: path.join(paths.appSrc, 'assets'),
         utils: path.join(paths.appSrc, 'utils'),
-        ...(config.alias || {}),
+        ...Object.entries(config.alias || {})
+            .reduce(
+              (t, [name, value]) => Object.assign(t, { [name]: path.join(paths.appSrc, value) }),
+              {},
+            ),
       },
     },
     resolveLoader: {
