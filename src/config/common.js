@@ -1,3 +1,13 @@
+/**
+* @Author: eason
+* @Date:   2017-06-28T10:28:21+08:00
+* @Email:  uniquecolesmith@gmail.com
+* @Last modified by:   eason
+* @Last modified time: 2017-07-15T16:45:11+08:00
+* @License: MIT
+* @Copyright: Eason(uniquecolesmith@gmail.com)
+*/
+
 import webpack from 'webpack';
 import autoprefixer from 'autoprefixer';
 import { existsSync } from 'fs';
@@ -12,6 +22,7 @@ export function getBabelOptions(config) {
     presets: [
       require.resolve('babel-preset-es2015'),
       require.resolve('babel-preset-react'),
+      require.resolve('babel-preset-react-optimize'),
       require.resolve('babel-preset-stage-0'),
     ].concat(config.extraBabelPresets || []),
     plugins: [
@@ -213,6 +224,9 @@ export const node = {
 export function getCommonPlugins({ config, paths, appBuild, NODE_ENV }) {
   const ret = [];
 
+  // ref: https://zhuanlan.zhihu.com/p/27980441
+  // ret.push(new webpack.optimize.ModuleConcatenationPlugin());
+
   let defineObj = {
     'process.env': {
       NODE_ENV: JSON.stringify(NODE_ENV),
@@ -236,8 +250,8 @@ export function getCommonPlugins({ config, paths, appBuild, NODE_ENV }) {
   }
   if (config.multipage) {
     ret.push(new webpack.optimize.CommonsChunkPlugin({
-      name: 'common',
-      filename: 'common.js',
+      name: 'vendor',
+      filename: '[name].js',
     }));
   }
 
@@ -264,4 +278,3 @@ export function getCommonPlugins({ config, paths, appBuild, NODE_ENV }) {
 
   return ret;
 }
-
