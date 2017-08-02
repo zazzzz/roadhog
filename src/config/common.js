@@ -13,6 +13,7 @@ import autoprefixer from 'autoprefixer';
 import { existsSync } from 'fs';
 import path from 'path';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
 import normalizeDefine from '../utils/normalizeDefine';
 
@@ -109,6 +110,7 @@ export function getFirstRules({ paths, babelOptions }) {
 
 export function getLastRules({ paths, babelOptions }) {
   return [
+    /*
     {
       test: /\.html$/,
       loader: 'file',
@@ -116,6 +118,7 @@ export function getLastRules({ paths, babelOptions }) {
         name: '[name].[ext]',
       },
     },
+    */
     {
       test: /\.tsx?$/,
       include: paths.appSrc,
@@ -275,6 +278,23 @@ export function getCommonPlugins({ config, paths, appBuild, NODE_ENV }) {
   if (config.provide) {
     ret.push(new webpack.ProvidePlugin(config.provide));
   }
+
+  ret.push(new HtmlWebpackPlugin({
+    template: path.join(paths.appPublic, 'index.html'),
+    minify: {
+      removeComments: true,
+      collapseWhitespace: true,
+      removeRedundantAttributes: true,
+      useShortDoctype: true,
+      removeEmptyAttributes: true,
+      removeStyleLinkTypeAttributes: true,
+      keepClosingSlash: true,
+      minifyJS: true,
+      minifyCSS: true,
+      minifyURLs: true,
+    },
+    inject: true,
+  }));
 
   return ret;
 }
