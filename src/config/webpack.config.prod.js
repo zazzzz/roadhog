@@ -24,12 +24,12 @@ export default function (args, appBuild, config, paths) {
 
   const {
     filename = '[name].js',
-    publicPath = '/',
+    publicPath = './',
     library = null,
     libraryTarget = 'var',
     devtool = debug ? defaultDevtool : false,
-    chunkFilename = '[name].async.js',
-    extractCssName = '[name].css',
+    chunkFilename = './[name].async.js',
+    extractCssName = './[name].css',
   } = config;
 
   const babelOptions = getBabelOptions(config);
