@@ -258,7 +258,7 @@ export function getCommonPlugins({ config, paths, appBuild, NODE_ENV }) {
   if (config.multipage) {
     ret.push(new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
-      filename: '[name].js',
+      // filename: '[name].js',
     }));
   }
 
