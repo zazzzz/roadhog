@@ -6,6 +6,7 @@ export default function getCSSLoaders(config) {
   const baseCSSOptions = {
     importLoaders: 1,
     sourceMap: !config.disableCSSSourceMap,
+    minimize: true,
   };
 
   if (config.disableCSSModules) {

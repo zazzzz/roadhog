@@ -1,9 +1,7 @@
 import CaseSensitivePathsPlugin from 'case-sensitive-paths-webpack-plugin';
-import CopyWebpackPlugin from 'copy-webpack-plugin';
 import webpack from 'webpack';
 import WatchMissingNodeModulesPlugin from 'react-dev-utils/WatchMissingNodeModulesPlugin';
 import SystemBellWebpackPlugin from 'system-bell-webpack-plugin';
-import { join } from 'path';
 import getPaths from './paths';
 import getEntry from '../utils/getEntry';
 import getTheme from '../utils/getTheme';
@@ -50,12 +48,6 @@ export default function (config, cwd) {
       context: paths.appSrc,
       manifest: require(paths.dllManifest),  // eslint-disable-line
     }),
-    new CopyWebpackPlugin([
-      {
-        from: join(paths.dllNodeModule, 'roadhog.dll.js'),
-        to: join(paths.appBuild, 'roadhog.dll.js'),
-      },
-    ]),
   ] : [];
 
   const finalWebpackConfig = {
