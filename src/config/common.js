@@ -258,7 +258,7 @@ export function getCommonPlugins({ config, paths, appBuild, NODE_ENV }) {
   if (config.multipage) {
     ret.push(new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
-      filename: '[name].js',
+      // filename: '[name].js',
     }));
   }
 
@@ -285,18 +285,7 @@ export function getCommonPlugins({ config, paths, appBuild, NODE_ENV }) {
 
   ret.push(new HtmlWebpackPlugin({
     template: path.join(paths.appPublic, 'index.html'),
-    minify: {
-      removeComments: true,
-      collapseWhitespace: true,
-      removeRedundantAttributes: true,
-      useShortDoctype: true,
-      removeEmptyAttributes: true,
-      removeStyleLinkTypeAttributes: true,
-      keepClosingSlash: true,
-      minifyJS: true,
-      minifyCSS: true,
-      minifyURLs: true,
-    },
+    minify: false,
     inject: true,
   }));
 
