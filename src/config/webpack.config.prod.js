@@ -77,6 +77,8 @@ export default function (args, appBuild, config, paths) {
         compress: {
           screw_ie8: true, // React doesn't support IE8
           warnings: false,
+          drop_console: true,
+          pure_funcs: ['console.log'],
         },
         mangle: {
           screw_ie8: true,
