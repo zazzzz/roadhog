@@ -20,7 +20,7 @@ function testBuild(cwd, done) {
     cwd,
   }).then(() => {
     try {
-      assertResult(join(cwd, 'node_modules/roadhog-dlls'), join(cwd, 'expected'));
+      assertResult(join(cwd, 'public/dll'), join(cwd, 'expected'));
     } catch (e) {
       console.log(e);
     }
