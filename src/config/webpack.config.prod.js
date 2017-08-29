@@ -2,6 +2,7 @@ import webpack from 'webpack';
 import OptimizeCssAssetsPlugin from 'optimize-css-assets-webpack-plugin';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import Visualizer from 'webpack-visualizer-plugin';
+import OfflinePlugin from 'offline-plugin';
 import getEntry from '../utils/getEntry';
 import getTheme from '../utils/getTheme';
 import getCSSLoaders from '../utils/getCSSLoaders';
@@ -24,6 +25,7 @@ export default function (args, appBuild, config, paths) {
   const NODE_ENV = debug ? 'development' : process.env.NODE_ENV;
 
   const {
+    pwa = false,
     filename = '[name].js',
     publicPath = './',
     library = null,
@@ -94,6 +96,14 @@ export default function (args, appBuild, config, paths) {
         },
       })]),
       ...(analyze ? [new Visualizer()] : []),
+      ...(pwa ? [new OfflinePlugin({
+        ServiceWorker: {
+          minify: false,
+        },
+        AppCache: {
+          directory: './',
+        },
+      })] : []),
     ],
     externals: config.externals,
     node,
