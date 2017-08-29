@@ -283,13 +283,11 @@ export function getCommonPlugins({ config, paths, appBuild, NODE_ENV }) {
     ret.push(new webpack.ProvidePlugin(config.provide));
   }
 
-  if (config.html) {
-    ret.push(new HtmlWebpackPlugin({
-      template: path.join(paths.appPublic, config.html),
-      minify: false,
-      inject: true,
-    }));
-  }
+  ret.push(new HtmlWebpackPlugin({
+    template: path.join(paths.appPublic, config.html || 'index.html'),
+    minify: false,
+    inject: true,
+  }));
 
   return ret;
 }
