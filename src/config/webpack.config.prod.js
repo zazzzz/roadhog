@@ -1,4 +1,5 @@
 import webpack from 'webpack';
+import OptimizeCssAssetsPlugin from 'optimize-css-assets-webpack-plugin';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import Visualizer from 'webpack-visualizer-plugin';
 import getEntry from '../utils/getEntry';
@@ -33,7 +34,7 @@ export default function (args, appBuild, config, paths) {
   } = config;
 
   const babelOptions = getBabelOptions(config);
-  const cssLoaders = getCSSLoaders(config, NODE_ENV);
+  const cssLoaders = getCSSLoaders(config);
   const theme = getTheme(process.cwd(), config);
 
   const output = {
@@ -62,6 +63,10 @@ export default function (args, appBuild, config, paths) {
     plugins: [
       // ref: https://zhuanlan.zhihu.com/p/27980441
       new webpack.optimize.ModuleConcatenationPlugin(),
+      new OptimizeCssAssetsPlugin({
+        cssProcessorOptions: { discardComments: { removeAll: true } },
+        canPrint: false,
+      }),
       new ExtractTextPlugin(extractCssName),
       ...getCommonPlugins({
         config,

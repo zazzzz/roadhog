@@ -1,12 +1,11 @@
 
-export default function getCSSLoaders(config, env) {
+export default function getCSSLoaders(config) {
   const own = [];
   const nodeModules = [];
 
   const baseCSSOptions = {
     importLoaders: 1,
     sourceMap: !config.disableCSSSourceMap,
-    minimize: env === 'production',
   };
 
   if (config.disableCSSModules) {

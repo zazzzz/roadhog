@@ -29,7 +29,7 @@ export default function (config, cwd) {
   } = config;
 
   const babelOptions = getBabelOptions(config);
-  const cssLoaders = getCSSLoaders(config, process.env.NODE_ENV);
+  const cssLoaders = getCSSLoaders(config);
   const theme = getTheme(process.cwd(), config);
   const paths = getPaths(cwd);
 
