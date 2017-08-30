@@ -283,22 +283,13 @@ export function getCommonPlugins({ config, paths, appBuild, NODE_ENV }) {
     ret.push(new webpack.ProvidePlugin(config.provide));
   }
 
-  ret.push(new HtmlWebpackPlugin({
-    template: path.join(paths.appPublic, 'index.html'),
-    minify: {
-      removeComments: true,
-      collapseWhitespace: true,
-      removeRedundantAttributes: true,
-      useShortDoctype: true,
-      removeEmptyAttributes: true,
-      removeStyleLinkTypeAttributes: true,
-      keepClosingSlash: true,
-      minifyJS: true,
-      minifyCSS: true,
-      minifyURLs: true,
-    },
-    inject: true,
-  }));
+  const htmlPath = path.join(paths.appPublic, config.html || 'index.html');
+  if (existsSync(htmlPath)) {
+    ret.push(new HtmlWebpackPlugin({
+      template: htmlPath,
+      inject: true,
+    }));
+  }
 
   return ret;
 }

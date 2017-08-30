@@ -1,6 +1,8 @@
 import webpack from 'webpack';
+import OptimizeCssAssetsPlugin from 'optimize-css-assets-webpack-plugin';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import Visualizer from 'webpack-visualizer-plugin';
+import OfflinePlugin from 'offline-plugin';
 import getEntry from '../utils/getEntry';
 import getTheme from '../utils/getTheme';
 import getCSSLoaders from '../utils/getCSSLoaders';
@@ -19,10 +21,11 @@ import {
 } from './common';
 
 export default function (args, appBuild, config, paths) {
-  const { watch, debug, analyze } = args;
+  const { debug, analyze } = args;
   const NODE_ENV = debug ? 'development' : process.env.NODE_ENV;
 
   const {
+    pwa = false,
     filename = '[name].js',
     publicPath = './',
     library = null,
@@ -60,12 +63,12 @@ export default function (args, appBuild, config, paths) {
       ],
     },
     plugins: [
-      ...(watch ? [] : [
-        new webpack.optimize.OccurrenceOrderPlugin(),
-        new webpack.optimize.DedupePlugin(),
-      ]),
       // ref: https://zhuanlan.zhihu.com/p/27980441
       new webpack.optimize.ModuleConcatenationPlugin(),
+      new OptimizeCssAssetsPlugin({
+        cssProcessorOptions: { discardComments: { removeAll: true } },
+        canPrint: false,
+      }),
       new ExtractTextPlugin(extractCssName),
       ...getCommonPlugins({
         config,
@@ -74,20 +77,33 @@ export default function (args, appBuild, config, paths) {
         NODE_ENV,
       }),
       ...(debug ? [] : [new webpack.optimize.UglifyJsPlugin({
-        compress: {
-          screw_ie8: true, // React doesn't support IE8
-          warnings: false,
-        },
-        mangle: {
-          screw_ie8: true,
-        },
-        output: {
-          comments: false,
-          screw_ie8: true,
-          ascii_only: true,
+        parallel: true,
+        uglifyOptions: {
+          compress: {
+            screw_ie8: true, // React doesn't support IE8
+            warnings: false,
+            drop_console: true,
+            pure_funcs: ['console.log'],
+          },
+          mangle: {
+            screw_ie8: true,
+          },
+          output: {
+            comments: false,
+            screw_ie8: true,
+            ascii_only: true,
+          },
         },
       })]),
       ...(analyze ? [new Visualizer()] : []),
+      ...(pwa ? [new OfflinePlugin({
+        ServiceWorker: {
+          minify: false,
+        },
+        AppCache: {
+          directory: './',
+        },
+      })] : []),
     ],
     externals: config.externals,
     node,
