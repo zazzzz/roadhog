@@ -2,6 +2,7 @@ import CaseSensitivePathsPlugin from 'case-sensitive-paths-webpack-plugin';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
 import webpack from 'webpack';
 import WatchMissingNodeModulesPlugin from 'react-dev-utils/WatchMissingNodeModulesPlugin';
+import DashboardPlugin from 'webpack-dashboard/plugin';
 import SystemBellWebpackPlugin from 'system-bell-webpack-plugin';
 import { join } from 'path';
 import getPaths from './paths';
@@ -58,6 +59,10 @@ export default function (config, cwd) {
     ]),
   ] : [];
 
+  const visualizerPlugins = config.visualizer ? [
+    new DashboardPlugin(),
+  ] : [];
+
   const finalWebpackConfig = {
     devtool,
     entry: getEntry(config, paths.appDirectory),
@@ -75,6 +80,7 @@ export default function (config, cwd) {
       new CaseSensitivePathsPlugin(),
       new WatchMissingNodeModulesPlugin(paths.appNodeModules),
       new SystemBellWebpackPlugin(),
+      ...visualizerPlugins,
       ...dllPlugins,
       ...getCommonPlugins({
         config,

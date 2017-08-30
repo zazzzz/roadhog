@@ -1,6 +1,6 @@
 {
   "name": "roadhogx",
-  "version": "1.0.7",
+  "version": "1.0.9",
   "description": "Cli tool for serve and build react app, based on roadhog, support JSON pattern config, support more features",
   "bin": {
     "roadhog": "./bin/roadhog.js"
@@ -99,6 +99,7 @@
     "typescript": "^2.3.3",
     "url-loader": "^0.5.7",
     "webpack": "^3.0.0-rc.1",
+    "webpack-dashboard": "^1.0.0-4",
     "webpack-dev-server": "^2.4.5",
     "webpack-visualizer-plugin": "^0.1.6",
     "yargs": "^8.0.1"
