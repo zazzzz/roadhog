@@ -29,6 +29,7 @@ export function getBabelOptions(config) {
     plugins: [
       require.resolve('babel-plugin-add-module-exports'),
       require.resolve('babel-plugin-react-require'),
+      require.resolve('babel-plugin-transform-decorators-legacy'),
     ].concat(config.extraBabelPlugins || []),
     cacheDirectory: true,
   };
