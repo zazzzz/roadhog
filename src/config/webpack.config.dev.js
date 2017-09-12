@@ -32,7 +32,7 @@ export default function (config, cwd) {
   const babelOptions = getBabelOptions(config);
   const cssLoaders = getCSSLoaders(config);
   const theme = getTheme(process.cwd(), config);
-  const paths = getPaths(cwd);
+  const paths = getPaths(cwd, config);
 
   const output = {
     path: paths.appBuild,
