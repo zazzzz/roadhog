@@ -54,8 +54,6 @@ function getOutputPath(rcConfig) {
 }
 
 export function build(argv) {
-  const paths = getPaths(argv.cwd);
-
   try {
     rcConfig = getConfig(process.env.NODE_ENV, argv.cwd);
   } catch (e) {
@@ -64,6 +62,8 @@ export function build(argv) {
     console.log(e.message);
     process.exit(1);
   }
+
+  const paths = getPaths(argv.cwd, rcConfig);
 
   outputPath = argv.outputPath || getOutputPath(rcConfig) || 'dist';
   appBuild = paths.resolveApp(outputPath);

@@ -23,8 +23,6 @@ let appBuild;
 let config;
 
 export function build(argv) {
-  const paths = getPaths(argv.cwd);
-
   try {
     rcConfig = getConfig(process.env.NODE_ENV, argv.cwd);
   } catch (e) {
@@ -33,6 +31,8 @@ export function build(argv) {
     console.log(e.message);
     process.exit(1);
   }
+
+  const paths = getPaths(argv.cwd, rcConfig);
 
   if (!rcConfig.dllPlugin) {
     console.log(chalk.red('dllPlugin config not found in .roadhogrc'));
