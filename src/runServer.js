@@ -21,7 +21,7 @@ process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 const DEFAULT_PORT = process.env.PORT ? parseInt(process.env.PORT, 10) : 8000;
 const isInteractive = process.stdout.isTTY;
 const cwd = process.cwd();
-const paths = getPaths(cwd);
+let paths;
 let compiler;
 
 require('yargs') // eslint-disable-line
@@ -226,6 +226,8 @@ function run(port) {
 
 function init() {
   readRcConfig();
+
+  paths = getPaths(cwd, rcConfig);
 
   if (rcConfig.dllPlugin && !fs.existsSync(paths.dllManifest)) {
     console.log(chalk.red('Failed to start the server, since you have enabled dllPlugin, but have not run `roadhog buildDll` before `roadhog server`.'));
