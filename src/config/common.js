@@ -145,11 +145,13 @@ export function getLastRules({ paths, babelOptions }) {
   ];
 }
 
-export function getCSSRules(env, { paths, cssLoaders, theme }) {
+export function getCSSRules(env, { paths, cssLoaders, theme, config }) {
   const rules = [
     {
       test: /\.css$/,
-      include: paths.appSrc,
+      include: (config && config.include && Array.isArray(config.include))
+      ? [paths.appSrc, ...(config.include.map(t => paths.resolveApp(t)))]
+      : paths.appSrc,
       use: [
         'style',
         ...cssLoaders.own,

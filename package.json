@@ -1,6 +1,6 @@
 {
   "name": "roadhogx",
-  "version": "1.0.17",
+  "version": "1.0.18",
   "description": "Cli tool for serve and build react app, based on roadhog, support JSON pattern config, support more features",
   "bin": {
     "roadhog": "./bin/roadhog.js"
