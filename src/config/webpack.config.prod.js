@@ -97,12 +97,11 @@ export default function (args, appBuild, config, paths) {
       })]),
       ...(analyze ? [new Visualizer()] : []),
       ...(pwa ? [new OfflinePlugin({
+        autoUpdate: pwa.autoUpdate || 1000 * 60 * 60 * 5,
         ServiceWorker: {
-          minify: false,
+          minify: true,
         },
-        AppCache: {
-          directory: './',
-        },
+        AppCache: pwa.AppCache || false,
       })] : []),
     ],
     externals: config.externals,
