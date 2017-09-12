@@ -32,7 +32,7 @@ export function build(argv) {
     process.exit(1);
   }
 
-  const paths = getPaths(argv.cwd, rcConfig);
+  const paths = getPaths(argv.cwd);
 
   if (!rcConfig.dllPlugin) {
     console.log(chalk.red('dllPlugin config not found in .roadhogrc'));

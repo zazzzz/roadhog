@@ -1,9 +1,7 @@
-# roadhog
+# RoadhogX
 
-[![NPM version](https://img.shields.io/npm/v/roadhog.svg?style=flat)](https://npmjs.org/package/roadhog)
-[![Build Status](https://img.shields.io/travis/sorrycc/roadhog.svg?style=flat)](https://travis-ci.org/sorrycc/roadhog)
-[![NPM downloads](http://img.shields.io/npm/dm/roadhog.svg?style=flat)](https://npmjs.org/package/roadhog)
-[![Dependencies](https://david-dm.org/sorrycc/roadhog/status.svg)](https://david-dm.org/sorrycc/roadhog)
+[![NPM version](https://img.shields.io/npm/v/roadhogx.svg?style=flat)](https://npmjs.org/package/roadhogx)
+[![NPM downloads](http://img.shields.io/npm/dm/roadhogx.svg?style=flat)](https://npmjs.org/package/roadhogx)
 
 [View README in English](./README_en-us.md)
 

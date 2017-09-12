@@ -57,7 +57,7 @@ export default function (args, appBuild, config, paths) {
     ...getResolve(config, paths),
     module: {
       rules: [
-        ...getFirstRules({ paths, babelOptions }),
+        ...getFirstRules({ paths, babelOptions, config }),
         ...getCSSRules('production', { paths, cssLoaders, theme }),
         ...getLastRules({ paths, babelOptions }),
       ],

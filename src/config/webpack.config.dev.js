@@ -32,7 +32,7 @@ export default function (config, cwd) {
   const babelOptions = getBabelOptions(config);
   const cssLoaders = getCSSLoaders(config);
   const theme = getTheme(process.cwd(), config);
-  const paths = getPaths(cwd, config);
+  const paths = getPaths(cwd);
 
   const output = {
     path: paths.appBuild,
@@ -62,7 +62,7 @@ export default function (config, cwd) {
     ...getResolve(config, paths),
     module: {
       rules: [
-        ...getFirstRules({ paths, babelOptions }),
+        ...getFirstRules({ paths, babelOptions, config }),
         ...getCSSRules('development', { paths, cssLoaders, theme }),
         ...getLastRules({ paths, babelOptions }),
       ],

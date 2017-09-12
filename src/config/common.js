@@ -87,7 +87,7 @@ export function getResolve(config, paths) {
   };
 }
 
-export function getFirstRules({ paths, babelOptions }) {
+export function getFirstRules({ paths, babelOptions, config }) {
   return [
     {
       exclude: [
@@ -106,7 +106,9 @@ export function getFirstRules({ paths, babelOptions }) {
     },
     {
       test: /\.(js|jsx)$/,
-      include: paths.appSrc,
+      include: (config && config.include && Array.isArray(config.include))
+        ? [paths.appSrc, ...(config.include.map(t => paths.resolveApp(t)))]
+        : paths.appSrc,
       loader: 'babel',
       options: babelOptions,
     },

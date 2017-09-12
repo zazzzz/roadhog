@@ -5,7 +5,7 @@ function resolveOwn(relativePath) {
   return resolve(__dirname, relativePath);
 }
 
-export default function getPaths(cwd, config) {
+export default function getPaths(cwd) {
   const appDirectory = realpathSync(cwd);
 
   function resolveApp(relativePath) {
@@ -16,7 +16,7 @@ export default function getPaths(cwd, config) {
     appBuild: resolveApp('dist'),
     appPublic: resolveApp('public'),
     appPackageJson: resolveApp('package.json'),
-    appSrc: resolveApp((config && config.src) ? config.src : 'src'),
+    appSrc: resolveApp('src'),
     appNodeModules: resolveApp('node_modules'),
     ownNodeModules: resolveOwn('../../node_modules'),
     dllNodeModule: resolveApp('public/dll'),

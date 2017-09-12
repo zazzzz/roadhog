@@ -63,7 +63,7 @@ export function build(argv) {
     process.exit(1);
   }
 
-  const paths = getPaths(argv.cwd, rcConfig);
+  const paths = getPaths(argv.cwd);
 
   outputPath = argv.outputPath || getOutputPath(rcConfig) || 'dist';
   appBuild = paths.resolveApp(outputPath);
