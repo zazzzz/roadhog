@@ -66,7 +66,12 @@ export default function (args, appBuild, config, paths) {
       // ref: https://zhuanlan.zhihu.com/p/27980441
       new webpack.optimize.ModuleConcatenationPlugin(),
       new OptimizeCssAssetsPlugin({
-        cssProcessorOptions: { discardComments: { removeAll: true } },
+        cssProcessorOptions: {
+          reduceIdents: false,
+          discardComments: {
+            removeAll: true,
+          },
+        },
         canPrint: false,
       }),
       new ExtractTextPlugin(extractCssName),
