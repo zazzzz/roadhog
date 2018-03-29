@@ -72,7 +72,7 @@ export function getResolve(config, paths) {
         utils: path.join(paths.appSrc, 'utils'),
         ...Object.entries(config.alias || {})
             .reduce(
-              (t, [name, value]) => Object.assign(t, { [name]: path.join(paths.appSrc, value) }),
+              (t, [name, value]) => Object.assign(t, { [name]: value }),
               {},
             ),
       },
